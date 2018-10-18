@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "931152899437",
+    "firebase_url": "https://recognition-d4421.firebaseio.com",
+    "project_id": "recognition-d4421",
+    "storage_bucket": "recognition-d4421.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931152899437:android:7bde7db5dbf5af7f",
+        "android_client_info": {
+          "package_name": "android.example.com.tflitecamerademo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931152899437-peqameucjuejehpkp0jdrc9pgtjabsrb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "android.example.com.tflitecamerademo",
+            "certificate_hash": "40e3840d32144a3094d0e414c6548e81f48f4e77"
+          }
+        },
+        {
+          "client_id": "931152899437-vfscmon66paflbh9hup78o3g4gnlom2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE2uyB4tONNxdUkDxASF5Bo3AxbeIYrvQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931152899437-vfscmon66paflbh9hup78o3g4gnlom2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
