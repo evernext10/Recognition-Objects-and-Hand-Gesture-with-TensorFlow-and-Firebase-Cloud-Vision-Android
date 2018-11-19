@@ -84,7 +84,7 @@ public class Camera2BasicFragment extends Fragment
   private final Object lock = new Object();
   private boolean runClassifier = false;
   private boolean checkedPermissions = false;
-  private TextView textView;
+  private TextView textView, textViewGesture;
   private ImageClassifier classifier;
 
   /** Ancho máximo de vista previa garantizado por Camera2 API */
@@ -216,6 +216,13 @@ public class Camera2BasicFragment extends Fragment
                 @Override
                 public void run() {
                   textView.setText(text);
+                  if(String.valueOf(text.charAt(14)).equalsIgnoreCase("(")){
+                    textViewGesture.setText(String.valueOf(text.charAt(15)));
+                  }else if(String.valueOf(text.charAt(14)).equalsIgnoreCase(")")){
+                    textViewGesture.setText(String.valueOf(text.charAt(13)));
+                  }else{
+                    textViewGesture.setText(String.valueOf(text.charAt(14)));
+                  }
                 }
               });
     }
@@ -295,6 +302,7 @@ public class Camera2BasicFragment extends Fragment
   public void onViewCreated(final View view, Bundle savedInstanceState) {
     textureView = (AutoFitTextureView2) view.findViewById(R.id.texture2);
     textView = (TextView) view.findViewById(R.id.text);
+    textViewGesture = (TextView) view.findViewById(R.id.text2);
   }
 
   /** Cargue el modelo y las etiquetas. */

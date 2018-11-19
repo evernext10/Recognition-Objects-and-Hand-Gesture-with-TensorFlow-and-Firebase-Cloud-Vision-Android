@@ -217,7 +217,20 @@ public class ImageClassifier {
     final int size = sortedLabels.size();
     for (int i = 0; i < size; ++i) {
       Map.Entry<String, Float> label = sortedLabels.poll();
-      textToShow = String.format("\n%s: %4.2f",label.getKey(),label.getValue()) + textToShow;
+      switch (label.getKey()){
+          case "0": textToShow = String.format("\nNumero (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "1": textToShow = String.format("\nNumero (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "2": textToShow = String.format("\nNumero (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "3": textToShow = String.format("\nNumero (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "4": textToShow = String.format("\nNumero (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "5": textToShow = String.format("\nNumero (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "a": textToShow = String.format("\nVocal (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "e": textToShow = String.format("\nVocal (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "i": textToShow = String.format("\nVocal (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "o": textToShow = String.format("\nVocal (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+          case "u": textToShow = String.format("\nVocal (%s) = %4.2f",label.getKey(),label.getValue()) + textToShow; break;
+      }
+
     }
     return textToShow;
   }
