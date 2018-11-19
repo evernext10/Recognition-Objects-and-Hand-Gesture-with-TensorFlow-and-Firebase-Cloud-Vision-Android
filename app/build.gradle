@@ -5,6 +5,9 @@ project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
 assert file(project.ext.ASSET_DIR + "/graph.lite").exists()
 assert file(project.ext.ASSET_DIR + "/labels.txt").exists()
 
+assert file(project.ext.ASSET_DIR + "/hand_graph.lite").exists()
+assert file(project.ext.ASSET_DIR + "/graph_label_strings.txt").exists()
+
 android {
     compileSdkVersion 26
     buildToolsVersion '27.0.3'
@@ -64,6 +67,7 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
 
     implementation 'org.tensorflow:tensorflow-lite:+'
+    implementation 'org.tensorflow:tensorflow-android:1.2.0'
 
     testImplementation 'junit:junit:4.12'
 }

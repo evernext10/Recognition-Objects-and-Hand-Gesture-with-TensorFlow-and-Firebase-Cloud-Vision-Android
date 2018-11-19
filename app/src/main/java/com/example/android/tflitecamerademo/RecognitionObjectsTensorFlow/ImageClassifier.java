@@ -20,6 +20,9 @@ import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.os.SystemClock;
 import android.util.Log;
+
+import org.tensorflow.lite.Interpreter;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,7 +37,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
-import org.tensorflow.lite.Interpreter;
 
 /** Classifies images with Tensorflow Lite. */
 public class ImageClassifier {
@@ -43,13 +45,13 @@ public class ImageClassifier {
   private static final String TAG = "HandgestureRecognition";
 
   /** Nombre del archivo de modelo almacenado en activos. */
-  private static final String MODEL_PATH = "graph.lite";
+  private static final String MODEL_PATH = "hand_graph.lite";
 
   /** Nombre del archivo de etiqueta almacenado en activos. */
-  private static final String LABEL_PATH = "labels.txt";
+  private static final String LABEL_PATH = "graph_label_strings.txt";
 
   /** Número de resultados que se muestran en la interfaz de usuario. */
-  private static final int RESULTS_TO_SHOW = 3;
+  private static final int RESULTS_TO_SHOW = 5;
 
   /** Dimensiones de las entradas. */
   private static final int DIM_BATCH_SIZE = 1;

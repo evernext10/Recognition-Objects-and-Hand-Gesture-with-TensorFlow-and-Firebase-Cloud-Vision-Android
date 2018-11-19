@@ -70,7 +70,7 @@ import java.util.concurrent.TimeUnit;
 
 /** Fragmentos básicos para la cámara. */
 public class Camera2BasicFragment extends Fragment
-    implements FragmentCompat.OnRequestPermissionsResultCallback {
+        implements FragmentCompat.OnRequestPermissionsResultCallback {
 
   /** Tag for the {@link Log}. */
   private static final String TAG = "Hand gesture Recognition";
@@ -88,42 +88,43 @@ public class Camera2BasicFragment extends Fragment
   private ImageClassifier classifier;
 
   /** Ancho máximo de vista previa garantizado por Camera2 API */
-  private static final int MAX_PREVIEW_WIDTH = 1920;
+  private static final int MAX_PREVIEW_WIDTH = 4608;
 
   /** Máxima altura de previsualización garantizada por Camera2 API */
-  private static final int MAX_PREVIEW_HEIGHT = 1080;
+  private static final int MAX_PREVIEW_HEIGHT = 2592;
 
   /**
    * {@link TextureView.SurfaceTextureListener} controla varios eventos de ciclo de {@link
    * TextureView}.
    */
   private final TextureView.SurfaceTextureListener surfaceTextureListener =
-      new TextureView.SurfaceTextureListener() {
+          new TextureView.SurfaceTextureListener() {
 
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-          openCamera(width, height);
-        }
+            @Override
+            public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
+              openCamera(width, height);
+            }
 
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-          configureTransform(width, height);
-        }
+            @Override
+            public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
+              configureTransform(width, height);
+            }
 
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
-          return true;
-        }
+            @Override
+            public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
+              return true;
+            }
 
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture texture) {}
-      };
+            @Override
+            public void onSurfaceTextureUpdated(SurfaceTexture texture) {
+            }
+          };
 
   /** Identificador de la corriente  {@link CameraDevice}. */
   private String cameraId;
 
-  /** An {@link AutoFitTextureView} para la vista previa de la cámara. */
-  private AutoFitTextureView textureView;
+  /** An {@link AutoFitTextureView2} para la vista previa de la cámara. */
+  private AutoFitTextureView2 textureView;
 
   /** A {@link CameraCaptureSession } para la vista previa de la cámara. */
   private CameraCaptureSession captureSession;
@@ -136,34 +137,34 @@ public class Camera2BasicFragment extends Fragment
 
   /** {@link CameraDevice.StateCallback} se llama cuando {@link CameraDevice} cambia su estado. */
   private final CameraDevice.StateCallback stateCallback =
-      new CameraDevice.StateCallback() {
+          new CameraDevice.StateCallback() {
 
-        @Override
-        public void onOpened(@NonNull CameraDevice currentCameraDevice) {
-          // Se llama a este método cuando se abre la cámara.  Empezamos la vista previa de la cámara.
-          cameraOpenCloseLock.release();
-          cameraDevice = currentCameraDevice;
-          createCameraPreviewSession();
-        }
+            @Override
+            public void onOpened(@NonNull CameraDevice currentCameraDevice) {
+              // Se llama a este método cuando se abre la cámara.  Empezamos la vista previa de la cámara.
+              cameraOpenCloseLock.release();
+              cameraDevice = currentCameraDevice;
+              createCameraPreviewSession();
+            }
 
-        @Override
-        public void onDisconnected(@NonNull CameraDevice currentCameraDevice) {
-          cameraOpenCloseLock.release();
-          currentCameraDevice.close();
-          cameraDevice = null;
-        }
+            @Override
+            public void onDisconnected(@NonNull CameraDevice currentCameraDevice) {
+              cameraOpenCloseLock.release();
+              currentCameraDevice.close();
+              cameraDevice = null;
+            }
 
-        @Override
-        public void onError(@NonNull CameraDevice currentCameraDevice, int error) {
-          cameraOpenCloseLock.release();
-          currentCameraDevice.close();
-          cameraDevice = null;
-          Activity activity = getActivity();
-          if (null != activity) {
-            activity.finish();
-          }
-        }
-      };
+            @Override
+            public void onError(@NonNull CameraDevice currentCameraDevice, int error) {
+              cameraOpenCloseLock.release();
+              currentCameraDevice.close();
+              cameraDevice = null;
+              Activity activity = getActivity();
+              if (null != activity) {
+                activity.finish();
+              }
+            }
+          };
 
   /** Un subproceso adicional para ejecutar tareas que no deberían bloquear la interfaz de usuario.  */
   private HandlerThread backgroundThread;
@@ -185,20 +186,22 @@ public class Camera2BasicFragment extends Fragment
 
   /** A {@link CameraCaptureSession.CaptureCallback} que controla los eventos relacionados con la captura. */
   private CameraCaptureSession.CaptureCallback captureCallback =
-      new CameraCaptureSession.CaptureCallback() {
+          new CameraCaptureSession.CaptureCallback() {
 
-        @Override
-        public void onCaptureProgressed(
-            @NonNull CameraCaptureSession session,
-            @NonNull CaptureRequest request,
-            @NonNull CaptureResult partialResult) {}
+            @Override
+            public void onCaptureProgressed(
+                    @NonNull CameraCaptureSession session,
+                    @NonNull CaptureRequest request,
+                    @NonNull CaptureResult partialResult) {
+            }
 
-        @Override
-        public void onCaptureCompleted(
-            @NonNull CameraCaptureSession session,
-            @NonNull CaptureRequest request,
-            @NonNull TotalCaptureResult result) {}
-      };
+            @Override
+            public void onCaptureCompleted(
+                    @NonNull CameraCaptureSession session,
+                    @NonNull CaptureRequest request,
+                    @NonNull TotalCaptureResult result) {
+            }
+          };
 
   /**
    * Muestra una{@link Toast} en el subproceso de interfaz de usuario para los resultados de clasificación.
@@ -209,12 +212,12 @@ public class Camera2BasicFragment extends Fragment
     final Activity activity = getActivity();
     if (activity != null) {
       activity.runOnUiThread(
-          new Runnable() {
-            @Override
-            public void run() {
-              textView.setText(text);
-            }
-          });
+              new Runnable() {
+                @Override
+                public void run() {
+                  textView.setText(text);
+                }
+              });
     }
   }
 
@@ -239,12 +242,12 @@ public class Camera2BasicFragment extends Fragment
    * @return El óptimo  {@code Size}, o uno arbitrario si ninguno era lo suficientemente grande
    */
   private static Size chooseOptimalSize(
-      Size[] choices,
-      int textureViewWidth,
-      int textureViewHeight,
-      int maxWidth,
-      int maxHeight,
-      Size aspectRatio) {
+          Size[] choices,
+          int textureViewWidth,
+          int textureViewHeight,
+          int maxWidth,
+          int maxHeight,
+          Size aspectRatio) {
 
     // Recopilar las resoluciones soportadas que son al menos tan grandes como la superficie de vista previa
     List<Size> bigEnough = new ArrayList<>();
@@ -254,8 +257,8 @@ public class Camera2BasicFragment extends Fragment
     int h = aspectRatio.getHeight();
     for (Size option : choices) {
       if (option.getWidth() <= maxWidth
-          && option.getHeight() <= maxHeight
-          && option.getHeight() == option.getWidth() * h / w) {
+              && option.getHeight() <= maxHeight
+              && option.getHeight() == option.getWidth() * h / w) {
         if (option.getWidth() >= textureViewWidth && option.getHeight() >= textureViewHeight) {
           bigEnough.add(option);
         } else {
@@ -283,14 +286,14 @@ public class Camera2BasicFragment extends Fragment
   /** Diseño de la vista previa y los botones. */
   @Override
   public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
+          LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_camera, container, false);
   }
 
   /** Conecte los botones a su controlador de eventos. */
   @Override
   public void onViewCreated(final View view, Bundle savedInstanceState) {
-    textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
+    textureView = (AutoFitTextureView2) view.findViewById(R.id.texture2);
     textView = (TextView) view.findViewById(R.id.text);
   }
 
@@ -355,18 +358,18 @@ public class Camera2BasicFragment extends Fragment
         }
 
         StreamConfigurationMap map =
-            characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+                characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
         if (map == null) {
           continue;
         }
 
         //Para capturas de imágenes fijas, usamos el tamaño más grande disponible.
         Size largest =
-            Collections.max(
-                Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)), new CompareSizesByArea());
+                Collections.max(
+                        Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)), new CompareSizesByArea());
         imageReader =
-            ImageReader.newInstance(
-                largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, /*maxImages*/ 2);
+                ImageReader.newInstance(
+                        largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, /*maxImages*/ 2);
 
         // Averigüe si necesitamos cambiar la dimensión para obtener el tamaño de vista previa en relación con el sensoror
         // Coordinar.
@@ -390,7 +393,7 @@ public class Camera2BasicFragment extends Fragment
             break;
           default:
             Log.e(TAG, "La rotación de la pantalla no es válida: " + displayRotation);
-            Toast.makeText(activity, "La rotación de la pantalla no es válida: "+displayRotation, Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "La rotación de la pantalla no es válida: " + displayRotation, Toast.LENGTH_SHORT).show();
         }
 
         Point displaySize = new Point();
@@ -416,13 +419,13 @@ public class Camera2BasicFragment extends Fragment
         }
 
         previewSize =
-            chooseOptimalSize(
-                map.getOutputSizes(SurfaceTexture.class),
-                rotatedPreviewWidth,
-                rotatedPreviewHeight,
-                maxPreviewWidth,
-                maxPreviewHeight,
-                largest);
+                chooseOptimalSize(
+                        map.getOutputSizes(SurfaceTexture.class),
+                        rotatedPreviewWidth,
+                        rotatedPreviewHeight,
+                        maxPreviewWidth,
+                        maxPreviewHeight,
+                        largest);
 
         // Ajustamos la relación de aspecto de TextureView con el tamaño de la vista previa que elegimos.
         int orientation = getResources().getConfiguration().orientation;
@@ -441,7 +444,7 @@ public class Camera2BasicFragment extends Fragment
       // Actualmente se produce un Camera2API cuando se utiliza el
       // dispositivo este código se ejecuta.
       ErrorDialog.newInstance(getString(R.string.camera_error))
-          .show(getChildFragmentManager(), FRAGMENT_DIALOG);
+              .show(getChildFragmentManager(), FRAGMENT_DIALOG);
     }
   }
 
@@ -449,9 +452,9 @@ public class Camera2BasicFragment extends Fragment
     Activity activity = getActivity();
     try {
       PackageInfo info =
-          activity
-              .getPackageManager()
-              .getPackageInfo(activity.getPackageName(), PackageManager.GET_PERMISSIONS);
+              activity
+                      .getPackageManager()
+                      .getPackageInfo(activity.getPackageName(), PackageManager.GET_PERMISSIONS);
       String[] ps = info.requestedPermissions;
       if (ps != null && ps.length > 0) {
         return ps;
