@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardInformation"
             app:cardElevation="13dp"
             android:layout_margin="20dp"
@@ -25,9 +25,9 @@
                 android:layout_height="match_parent" />
 
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_below="@+id/cardInformation"
             android:id="@+id/cardHand"
             app:cardElevation="13dp"
@@ -41,9 +41,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_below="@+id/cardHand"
             android:id="@+id/cardObjectFirebase"
             app:cardElevation="13dp"
@@ -57,9 +57,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_below="@+id/cardObjectFirebase"
             android:id="@+id/cardObject"
             app:cardElevation="13dp"
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
 
