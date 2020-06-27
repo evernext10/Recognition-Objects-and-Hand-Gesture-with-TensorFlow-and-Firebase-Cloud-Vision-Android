@@ -28,9 +28,9 @@
 
     <application
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher_ml"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/MaterialTheme">
         <activity
             android:name=".RecognitionObjects.CameraActivity"
@@ -49,21 +49,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home.AboutPageDevelopers"
-            android:allowBackup="true"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".RecognitionFirebase.RecognitionFirebaseActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="label" />
         </activity>
-        <activity android:name=".Home.Hand.MainActivity"
-            android:theme="@style/AppTheme">
 
-        </activity>
     </application>
 
 </manifest>

@@ -12,23 +12,6 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardInformation"
-            app:cardElevation="13dp"
-            android:layout_margin="20dp"
-            app:cardCornerRadius="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
-            <ImageView
-                android:scaleType="centerCrop"
-                android:src="@drawable/x"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_below="@+id/cardInformation"
             android:id="@+id/cardHand"
             app:cardElevation="13dp"
             android:layout_margin="20dp"
