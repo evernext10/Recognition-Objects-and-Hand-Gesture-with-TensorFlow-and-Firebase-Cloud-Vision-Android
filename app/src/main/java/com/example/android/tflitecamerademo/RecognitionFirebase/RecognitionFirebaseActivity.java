@@ -2,13 +2,14 @@ package com.example.android.tflitecamerademo.RecognitionFirebase;
 
 import android.app.AlertDialog;
 import android.graphics.Bitmap;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.tflitecamerademo.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -56,8 +57,8 @@ public class RecognitionFirebaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognition_firebase);
 
-        cameraView = (CameraView)findViewById(R.id.camera_view);
-        btnDetect = (Button)findViewById(R.id.btn_detect);
+        cameraView = (CameraView) findViewById(R.id.camera_view);
+        btnDetect = (Button) findViewById(R.id.btn_detect);
         waitingDialog = new SpotsDialog.Builder().setContext(this).setMessage("Por favor espere...").setCancelable(false).build();
 
         FirebaseVisionLabelDetector detector = FirebaseVision.getInstance().getVisionLabelDetector();
@@ -77,7 +78,7 @@ public class RecognitionFirebaseActivity extends AppCompatActivity {
             public void onImage(CameraKitImage cameraKitImage) {
                 waitingDialog.show();
                 Bitmap bitmap = cameraKitImage.getBitmap();
-                bitmap = Bitmap.createScaledBitmap(bitmap,cameraView.getWidth(),cameraView.getHeight(),false);
+                bitmap = Bitmap.createScaledBitmap(bitmap, cameraView.getWidth(), cameraView.getHeight(), false);
                 cameraView.stop();
 
                 runDetector(bitmap);
@@ -104,7 +105,7 @@ public class RecognitionFirebaseActivity extends AppCompatActivity {
         new InternetCheck(new InternetCheck.Consumer() {
             @Override
             public void accept(boolean internet) {
-                if(internet){
+                if (internet) {
                     FirebaseVisionCloudDetectorOptions options = new FirebaseVisionCloudDetectorOptions.Builder().setMaxResults(1).build();
                     FirebaseVisionCloudLabelDetector detector = FirebaseVision.getInstance().getVisionCloudLabelDetector(options);
                     detector.detectInImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionCloudLabel>>() {
@@ -115,10 +116,10 @@ public class RecognitionFirebaseActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d("error", "onFailure: "+e.getMessage());
+                            Log.d("error", "onFailure: " + e.getMessage());
                         }
                     });
-                }else{
+                } else {
                     FirebaseVisionLabelDetectorOptions options = new FirebaseVisionLabelDetectorOptions.Builder().setConfidenceThreshold(0.8f).build();
                     FirebaseVisionLabelDetector detector = FirebaseVision.getInstance().getVisionLabelDetector(options);
 
@@ -130,7 +131,7 @@ public class RecognitionFirebaseActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d("error", "onFailure: "+e.getMessage());
+                            Log.d("error", "onFailure: " + e.getMessage());
                         }
                     });
 
@@ -140,18 +141,18 @@ public class RecognitionFirebaseActivity extends AppCompatActivity {
     }
 
     private void processDataResultCloud(List<FirebaseVisionCloudLabel> firebaseVisionCloudLabels) {
-        for(FirebaseVisionCloudLabel label : firebaseVisionCloudLabels){
-            Toast.makeText(this, "Resultado de Cloud: "+label.getLabel(), Toast.LENGTH_SHORT).show();
+        for (FirebaseVisionCloudLabel label : firebaseVisionCloudLabels) {
+            Toast.makeText(this, "Resultado de Cloud: " + label.getLabel(), Toast.LENGTH_SHORT).show();
         }
-        if(waitingDialog.isShowing())
+        if (waitingDialog.isShowing())
             waitingDialog.dismiss();
     }
 
     private void processDataResult(List<FirebaseVisionLabel> firebaseVisionLabels) {
-        for(FirebaseVisionLabel label : firebaseVisionLabels){
-            Toast.makeText(this, "Resultado del dispositivo: "+label.getLabel(), Toast.LENGTH_SHORT).show();
+        for (FirebaseVisionLabel label : firebaseVisionLabels) {
+            Toast.makeText(this, "Resultado del dispositivo: " + label.getLabel(), Toast.LENGTH_SHORT).show();
         }
-        if(waitingDialog.isShowing())
+        if (waitingDialog.isShowing())
             waitingDialog.dismiss();
     }
 }

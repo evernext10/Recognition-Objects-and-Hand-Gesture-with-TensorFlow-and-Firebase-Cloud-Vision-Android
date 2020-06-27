@@ -2,12 +2,13 @@ package com.example.android.tflitecamerademo.Home;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.android.tflitecamerademo.R;
 
@@ -17,8 +18,6 @@ import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
 
 public class AboutPageDevelopers extends AppCompatActivity {
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -2,9 +2,10 @@ package com.example.android.tflitecamerademo.Home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import android.view.View;
 
 import com.example.android.tflitecamerademo.R;
 import com.example.android.tflitecamerademo.RecognitionFirebase.RecognitionFirebaseActivity;
@@ -14,17 +15,17 @@ import com.example.android.tflitecamerademo.RecognitionObjectsTensorFlow.Camera2
 
 public class HomeActivity extends AppCompatActivity {
 
-    CardView information, hand, object, objectfirebase;
+    CardView information, hand, object, objectFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        information = (CardView) findViewById(R.id.cardInformation);
-        hand = (CardView) findViewById(R.id.cardHand);
-        object = (CardView) findViewById(R.id.cardObject);
-        objectfirebase = (CardView)findViewById(R.id.cardObjectFirebase);
+        information = findViewById(R.id.cardInformation);
+        hand = findViewById(R.id.cardHand);
+        object = findViewById(R.id.cardObject);
+        objectFirebase = findViewById(R.id.cardObjectFirebase);
 
         information.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        objectfirebase.setOnClickListener(new View.OnClickListener() {
+        objectFirebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, RecognitionFirebaseActivity.class);

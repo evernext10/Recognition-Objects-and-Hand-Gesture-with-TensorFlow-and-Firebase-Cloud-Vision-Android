@@ -5,11 +5,8 @@ import android.os.AsyncTask;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-public class InternetCheck extends AsyncTask<Void,Void,Boolean>{
+public class InternetCheck extends AsyncTask<Void, Void, Boolean> {
 
-    public interface Consumer{
-        void accept(boolean internet);
-    }
     Consumer consumer;
 
     public InternetCheck(Consumer consumer) {
@@ -19,12 +16,12 @@ public class InternetCheck extends AsyncTask<Void,Void,Boolean>{
 
     @Override
     protected Boolean doInBackground(Void... voids) {
-        try{
+        try {
             Socket socket = new Socket();
-            socket.connect(new InetSocketAddress("google.com",80),1500);
+            socket.connect(new InetSocketAddress("google.com", 80), 1500);
             socket.close();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -33,5 +30,9 @@ public class InternetCheck extends AsyncTask<Void,Void,Boolean>{
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         consumer.accept(aBoolean);
+    }
+
+    public interface Consumer {
+        void accept(boolean internet);
     }
 }

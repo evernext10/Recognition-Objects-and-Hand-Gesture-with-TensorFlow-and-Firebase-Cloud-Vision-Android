@@ -20,18 +20,20 @@ import android.os.Bundle;
 
 import com.example.android.tflitecamerademo.R;
 
-/** Main {@code Activity} clase para la aplicación de la cámara. */
+/**
+ * Main {@code Activity} clase para la aplicación de la cámara.
+ */
 public class Camera2Activity extends Activity {
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_camera);
-    if (null == savedInstanceState) {
-      getFragmentManager()
-          .beginTransaction()
-          .replace(R.id.container, Camera2BasicFragment.newInstance())
-          .commit();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera);
+        if (null == savedInstanceState) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, Camera2BasicFragment.newInstance())
+                    .commit();
+        }
     }
-  }
 }
