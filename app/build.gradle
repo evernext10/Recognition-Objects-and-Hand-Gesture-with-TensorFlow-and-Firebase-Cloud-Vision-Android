@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
 
@@ -60,6 +62,8 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-android:1.2.0'
 
     testImplementation 'junit:junit:4.13'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 apply plugin: 'com.google.gms.google-services'
